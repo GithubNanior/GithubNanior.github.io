@@ -20,6 +20,7 @@
 }
 
 .topbar a:hover{
+    color:black;
     background-color: rgb(235, 235, 235);
 }
 
@@ -79,6 +80,7 @@ a:hover {
 .card:hover {
     scale: 1.05;
     cursor: pointer;
+    color: black;
 }
 
 .card h3 {
