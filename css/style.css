@@ -95,9 +95,10 @@ h2 {
 }
 
 a {
-    color:blue;
+    color: black;
+    font-weight: bold;
 }
 
 a:hover {
-    color:rgb(80, 80, 255);
+    color: rgb(70, 70, 70);
 }
