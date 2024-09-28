@@ -12,6 +12,12 @@
     text-align: center;
 }
 
+.filler-card {
+    display: block;
+    width: 250px;
+    height: 0px;
+}
+
 .card-front, .card-back {
     box-sizing: border-box;
     padding: 15px;
