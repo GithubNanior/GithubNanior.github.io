@@ -1,3 +1,24 @@
+body{
+    background-color:darkgray;
+    margin: 0px;
+}
+
+content {
+    display: block;
+    width: 50%;
+    min-width: 1000px;
+    margin: 0 auto;
+    height: fit-content;
+    background-color: rgb(180, 180, 180);
+}
+
+@media screen and (max-width: 1000px) {
+    content {
+        width: 100%;
+        min-width: 0px;
+    }
+}
+
 .topbar{
     display:flex;
     width: 100%;
@@ -24,27 +45,6 @@
     background-color: rgb(235, 235, 235);
 }
 
-body{
-    background-color:darkgray;
-    margin: 0px;
-}
-
-content {
-    display: block;
-    width: 50%;
-    min-width: 1000px;
-    margin: 0 auto;
-    height: fit-content;
-    background-color: rgb(180, 180, 180);
-}
-
-@media screen and (max-width: 1000px) {
-    content {
-        width: 100%;
-        min-width: 0px;
-    }
-}
-
 section {
     margin: 10px 0px;
     padding: 20px;
@@ -54,14 +54,6 @@ section {
 h2 {
     margin: 0;
     padding-bottom: 10px;
-}
-
-a {
-    color:blue;
-}
-
-a:hover {
-    color:rgb(80, 80, 255);
 }
 
 .card {
@@ -100,4 +92,12 @@ a:hover {
     grid-auto-flow: row;
     width: 100%;
     height: fit-content;
+}
+
+a {
+    color:blue;
+}
+
+a:hover {
+    color:rgb(80, 80, 255);
 }
