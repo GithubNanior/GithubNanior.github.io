@@ -1,0 +1,63 @@
+@property --transition-time {
+    syntax: "<time>";
+    inherits: true;
+    initial-value: 0.1s;
+}
+
+.card {
+    display: block;
+    width: 250px;
+    height: 350px;
+    position: relative;
+    text-align: center;
+}
+
+.card-front, .card-back {
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: rgb(163, 163, 163);
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 3px;
+}
+
+.card .card-front {
+    scale: 1 1;
+    transition: scale var(--transition-time) var(--transition-time);
+}
+
+.card:hover .card-front {
+    scale: 0 1.1;
+    transition: scale var(--transition-time) 0s;
+}
+
+.card .card-back {
+    scale: 0 1;
+    transition: scale var(--transition-time) 0s;
+}
+
+.card:hover .card-back {
+    scale: 1.1 1.1;
+    transition: scale var(--transition-time) var(--transition-time);
+}
+
+.card h3 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.card img {
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.card .placeholder-img {
+    box-sizing: border-box;
+    display: block; 
+    background-color: beige;
+    width: 100%; 
+    padding-top: 79.54%;
+    margin-bottom: 5px;
+}
