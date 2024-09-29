@@ -85,7 +85,7 @@ section hr {
     border-color: var(--panel-border-color);
 }
 
-.grid-container {
+.flex-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
