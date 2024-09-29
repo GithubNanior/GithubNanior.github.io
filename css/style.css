@@ -1,12 +1,25 @@
+:root {
+    --background-color: rgb(17, 24, 39);
+    --panel-color: rgb(31, 41, 55);
+    --panel-border-color: rgb(55, 65, 81);
+    --highlighted-panel-color: rgb(45, 55, 68);
+    --text-color: rgb(209, 213, 219);
+    --highlighted-text-color: white;
+}
+
 body {
-    background-color:darkgray;
+    background-color: var(--background-color);
     margin: 0px;
+    font-size: 1.125rem;
+    font-style: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--text-color);
 }
 
 .topbar {
     display: flex;
-    height: 50px;
-    background-color: rgb(121, 121, 121);
+    height: 70px;
+    border: 1px solid var(--panel-border-color);
+    background-color: var(--panel-color);
     padding: 0px;
     margin: 0 auto;
 
@@ -16,26 +29,24 @@ body {
 
 .topbar a {
     display: flex;
-    padding: 20px;
-    color: black;
+    padding: 30px;
+    color: var(--text-color);
     transition: background-color 0.1s;
     align-items: center;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-decoration: none;
-    font-size: large;
+    font-size: x-large;
 }
 
 .topbar a:hover {
-    color: black;
-    background-color: rgb(235, 235, 235);
+    color: var(--highlighted-text-color);
+    background-color: var(--highlighted-backdrop-color);
 }
 
 content {
     display: block;
     margin: 0 auto;
-    height: 100%;
-    background-color: rgb(180, 180, 180);
 
     width: 50%;
     min-width: 1100px;
@@ -54,14 +65,20 @@ content {
 }
 
 section {
-    margin: 10px 0px;
+    margin-top: 10px;
+    border: 1px solid var(--panel-border-color);
     padding: 20px;
-    background-color: rgb(190, 190, 190);
+    background-color: var(--panel-color);
 }
 
 h2 {
     margin: 0;
     padding-bottom: 20px;
+}
+
+section hr {
+    margin: 0 -20px;
+    border-color: var(--panel-border-color);
 }
 
 .grid-container {
@@ -73,10 +90,10 @@ h2 {
 }
 
 a {
-    color: black;
+    color: var(--text-color);
     font-weight: bold;
 }
 
 a:hover {
-    color: rgb(70, 70, 70);
+    color: var(--highlighted-text-color);
 }
