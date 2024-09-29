@@ -41,7 +41,7 @@ body {
 
 .topbar a:hover {
     color: var(--highlighted-text-color);
-    background-color: var(--highlighted-backdrop-color);
+    background-color: var(--highlighted-panel-color);
 }
 
 content {
