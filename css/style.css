@@ -110,3 +110,15 @@ a {
 a:hover {
     color: var(--highlighted-text-color);
 }
+
+a.button {
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    margin: 5px;
+
+    border-radius: 10px;
+    border: 1px solid var(--panel-border-color);
+    padding: 20px;
+    background-color: var(--panel-color);
+}
