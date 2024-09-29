@@ -10,7 +10,7 @@
 
 .card {
     display: block;
-    width: 250px;
+    width: 249px;
     height: 350px;
     position: relative;
     text-align: center;
@@ -18,7 +18,7 @@
 
 .filler-card {
     display: block;
-    width: 250px;
+    width: 249px;
     height: 0px;
 }
 
