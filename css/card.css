@@ -4,6 +4,10 @@
     initial-value: 0.1s;
 }
 
+:root {
+    --card-color: rgb(45, 55, 68);
+}
+
 .card {
     display: block;
     width: 250px;
@@ -21,7 +25,7 @@
 .card-front, .card-back {
     box-sizing: border-box;
     padding: 15px;
-    background-color: rgb(163, 163, 163);
+    background-color: var(--card-color);
     border-radius: 10px;
     position: absolute;
     width: 100%;
