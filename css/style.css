@@ -93,6 +93,11 @@ section hr {
     width: 100%;
 }
 
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
 a {
     color: var(--text-color);
     font-weight: bold;
