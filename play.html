@@ -9,14 +9,35 @@
         <script type="text/javascript" src="https://static.itch.io/api.js"></script>
         <script type="text/javascript" src="js/itchUtil.js"></script>
         <script type="text/javascript">
-            let gameName = new URLSearchParams(window.location.search).get("game");
-            let gameData = null; 
+            let gameName = new URLSearchParams(window.location.search).get("game")
+
+            let gameData = null
+            let gameContainer = null
+
+            //I didn't find any better way to write this, I'm requesting data in parallel, and the latest to complete will be the one to put things together
+            getGameData(gameName).then((data)=>{
+                gameData = data
+                if (gameContainer != null)
+                {
+                    CreateIframe()
+                }
+            })
 
             window.onload = function() {
-                getGameData(gameName).then((data)=>{
-                    gameData = data
-                    document.getElementById("game-container").innerHTML = `<iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675"><a href="https://danior.itch.io/${gameName}">Play on itch.io</a></iframe>`
-                })
+                gameContainer = Document.getElementById("game-container")
+                if (gameData != null)
+                {
+                    CreateIframe()
+                }
+            }
+
+            function CreateIframe()
+            {
+                gameContainer.innerHTML = `
+                    <iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675">
+                        <a href="https://danior.itch.io/${gameName}">Play on itch.io</a>
+                    </iframe>
+                `
             }
         </script>
         <title>Nanior's Attic</title>
