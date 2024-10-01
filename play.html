@@ -6,6 +6,19 @@
         <meta name="theme-color" content="#111827">
         <meta name="description" content="P-Practite? Practisite? Practice site?">
         <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="https://static.itch.io/api.js"></script>
+        <script type="text/javascript" src="js/itchUtil.js"></script>
+        <script type="text/javascript">
+            let gameName = new URLSearchParams(window.location.search).get("game");
+            let gameData = null; 
+
+            window.onload = function() {
+                getGameData(gameName).then((data)=>{
+                    gameData = data
+                    document.getElementById("game-container").innerHTML = `<iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675"><a href="https://danior.itch.io/${gameName}">Play on itch.io</a></iframe>`
+                })
+            }
+        </script>
         <title>Nanior's Attic</title>
     </head>
     <body>
@@ -20,8 +33,8 @@
             <section>
                 <h2 id="game-title">Game title</h2>
                 <hr>
-                <div class="flex-center">
-                    <iframe frameborder="0" src="https://itch.io/embed-upload/10719092?color=000000" allowfullscreen="" width="975" height="675"><a href="https://danior.itch.io/mechaponga">Play MechaPonga on itch.io</a></iframe>
+                <div class="flex-center" id="game-container">
+                    
                 </div>
             </section>
         </content>
