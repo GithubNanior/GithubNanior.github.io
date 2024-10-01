@@ -122,3 +122,13 @@ a.button {
     padding: 20px;
     background-color: var(--panel-color);
 }
+
+.placeholder-iframe {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 975px;
+    height: 675px;
+    background-color: black;
+}
