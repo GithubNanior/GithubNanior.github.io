@@ -12,6 +12,7 @@
             let gameName = new URLSearchParams(window.location.search).get("game")
 
             let gameData = null
+            let gameDescription = null
             let gameContainer = null
 
             //I didn't find any better way to write this, I'm requesting data in parallel, and the latest to complete will be the one to put things together
@@ -23,11 +24,25 @@
                 }
             })
 
+            fetch(`descriptions/${gameName}.html`).then((description)=>{
+                description.text().then((html)=>{
+                    gameDescription = html
+                    if (gameContainer != null)
+                    {
+                        InsertDescription()
+                    }
+                })
+            })
+
             window.onload = function() {
                 gameContainer = document.getElementById("game-container")
                 if (gameData != null)
                 {
                     CreateIframe()
+                }
+                if (gameDescription != null)
+                {
+                    InsertDescription()
                 }
             }
 
@@ -39,6 +54,11 @@
                         <a href="https://danior.itch.io/${gameName}">Play on itch.io</a>
                     </iframe>
                 `
+            }
+
+            function InsertDescription()
+            {
+                document.getElementById("game-description").innerHTML = gameDescription
             }
         </script>
         <title>Nanior's Attic</title>
@@ -58,6 +78,9 @@
                 <div class="flex-center" id="game-container">
                     
                 </div>
+            </section>
+            <section id="game-description">
+
             </section>
         </content>
     </body>
