@@ -33,6 +33,7 @@
 
             function CreateIframe()
             {
+                document.getElementById("game-title").innerHTML = gameData["title"]
                 gameContainer.innerHTML = `
                     <iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675">
                         <a href="https://danior.itch.io/${gameName}">Play on itch.io</a>
@@ -52,7 +53,7 @@
         </header>
         <content>
             <section>
-                <h2 id="game-title">Game title</h2>
+                <h2 id="game-title"></h2>
                 <hr>
                 <div class="flex-center" id="game-container">
                     
