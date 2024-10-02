@@ -123,9 +123,10 @@ a.button {
     background-color: var(--panel-color);
 }
 
-.placeholder-iframe {
+#placeholder-iframe {
     box-sizing: border-box;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     width: 975px;
