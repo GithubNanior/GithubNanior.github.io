@@ -12,53 +12,98 @@
             let gameName = new URLSearchParams(window.location.search).get("game")
 
             let gameData = null
-            let gameDescription = null
-            let gameContainer = null
 
-            //I didn't find any better way to write this, I'm requesting data in parallel, and the latest to complete will be the one to put things together
             getGameData(gameName).then((data)=>{
-                gameData = data
-                if (gameContainer != null)
+                if (data["errors"] == null)
                 {
-                    CreateIframe()
+                    gameData = data
+                    createIframe()
+                }
+                else
+                {
+                    iframeFailure(data["errors"]);
                 }
             })
 
             fetch(`descriptions/${gameName}.html`).then((description)=>{
-                description.text().then((html)=>{
-                    gameDescription = html
-                    if (gameContainer != null)
-                    {
-                        InsertDescription()
-                    }
-                })
+                if (!description.ok) 
+                {
+                    descriptionFailure(`Error: ${description.status} ${description.statusText}`);
+                }
+                else
+                {
+                    description.text().then((html)=>{
+                        setDescription(html)
+                    })
+                }
             })
 
-            window.onload = function() {
-                gameContainer = document.getElementById("game-container")
-                if (gameData != null)
-                {
-                    CreateIframe()
-                }
-                if (gameDescription != null)
-                {
-                    InsertDescription()
-                }
-            }
-
-            function CreateIframe()
+            function createIframe(html)
             {
+                if (document.readyState == "loading")
+                {
+                    window.addEventListener("DOMContentLoaded", ()=>{
+                        createIframe(html)
+                    })
+                    return
+                }
+                
                 document.getElementById("game-title").innerHTML = gameData["title"]
-                gameContainer.innerHTML = `
+                document.getElementById("game-container").innerHTML = `
                     <iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675">
                         <a href="https://danior.itch.io/${gameName}">Play on itch.io</a>
                     </iframe>
                 `
             }
 
-            function InsertDescription()
+            function iframeFailure(reason)
             {
-                document.getElementById("game-description").innerHTML = gameDescription
+                if (document.readyState == "loading")
+                {
+                    window.addEventListener("DOMContentLoaded", ()=>{
+                        iframeFailure(reason)
+                    })
+                    return
+                }
+                    
+                document.getElementById("game-container").innerHTML = `
+                    <div id="placeholder-iframe">
+                        Oops! Something's wrong!
+                        <br>
+                        Error: ${reason.join(", ")}.
+                    </div>
+                `
+            }
+
+            function setDescription(html)
+            {
+                if (document.readyState == "loading")
+                {
+                    window.addEventListener("DOMContentLoaded", ()=>{
+                        setDescription(html)
+                    })
+                    return
+                }
+
+                document.getElementById("game-description").innerHTML = html
+            }
+
+            function descriptionFailure(reason)
+            {
+                if (document.readyState == "loading")
+                {
+                    window.addEventListener("DOMContentLoaded", ()=>{
+                        descriptionFailure(reason)
+                    })
+                    return
+                }
+
+                document.getElementById("game-description").innerHTML = `
+                    <p>
+                        <h3>Surprise! We failed to fetch game description! :D</h3>
+                        ${reason}
+                    </p>
+                `
             }
         </script>
         <title>Nanior's Attic</title>
@@ -73,10 +118,10 @@
         </header>
         <content>
             <section>
-                <h2 id="game-title"></h2>
+                <h2 id="game-title"> </h2>
                 <hr>
                 <div class="flex-center" id="game-container">
-                    <div class="placeholder-iframe">
+                    <div id="placeholder-iframe">
                         <noscript>
                             Error: This page requires javascript to function!
                         </noscript>
