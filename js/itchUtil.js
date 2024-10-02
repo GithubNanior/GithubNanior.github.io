@@ -37,10 +37,17 @@ function getGameData(name)
             user: "Danior",
             game: name,
             onComplete: function(data) {
-                getGameEmbedId(name).then((id)=>(
-                    data["embedId"] = id,
+                if (data["errors"] == null)
+                {
+                    getGameEmbedId(name).then((id)=>(
+                        data["embedId"] = id,
+                        resolve(data)
+                    ))
+                }
+                else
+                {
                     resolve(data)
-                ))
+                }
             }
         })
     ))
