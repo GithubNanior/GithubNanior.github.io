@@ -10,21 +10,21 @@
 
 .card {
     display: block;
-    width: 249px;
-    height: 350px;
+    width: 14em;
+    height: 20em;
     position: relative;
     text-align: center;
 }
 
 .filler-card {
     display: block;
-    width: 249px;
+    width: 14em;
     height: 0px;
 }
 
 .card-front, .card-back {
     box-sizing: border-box;
-    padding: 15px;
+    padding: 1em;
     background-color: var(--card-color);
     border-radius: 10px;
     position: absolute;
@@ -60,7 +60,7 @@
 
 .card img {
     width: 100%;
-    padding-bottom: 5px;
+    margin-bottom: 0.5em;
 }
 
 .card .placeholder-img {
@@ -69,5 +69,5 @@
     background-color: beige;
     width: 100%; 
     padding-top: 79.54%;
-    margin-bottom: 5px;
+    margin-bottom: 0.5em;
 }

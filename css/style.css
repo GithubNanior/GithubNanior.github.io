@@ -133,3 +133,14 @@ a.button {
     height: 675px;
     background-color: black;
 }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.125rem;
+
+    gap: 1.5rem;
+    max-width: calc(1.125rem * 56 + 1.5rem * 3);
+}
