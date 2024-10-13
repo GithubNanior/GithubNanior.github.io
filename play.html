@@ -48,8 +48,8 @@
                     return
                 }
                 
-                document.getElementById("game-title").innerHTML = gameData["title"]
-                document.getElementById("game-container").innerHTML = `
+                document.querySelector("#game-title").innerHTML = gameData["title"]
+                document.querySelector("#game-container").innerHTML = `
                     <iframe frameborder="0" src="https://itch.io/embed-upload/${gameData["embedId"]}?color=000000" allowfullscreen="" width="975" height="675">
                         <a href="https://danior.itch.io/${gameName}">Play on itch.io</a>
                     </iframe>
@@ -66,7 +66,7 @@
                     return
                 }
                     
-                document.getElementById("game-container").innerHTML = `
+                document.querySelector("#game-container").innerHTML = `
                     <div id="placeholder-iframe">
                         Oops! Something's wrong!
                         <br>
@@ -85,7 +85,7 @@
                     return
                 }
 
-                document.getElementById("game-description").innerHTML = html
+                document.querySelector("#game-description").innerHTML = html
             }
 
             function descriptionFailure(reason)
@@ -98,7 +98,7 @@
                     return
                 }
 
-                document.getElementById("game-description").innerHTML = `
+                document.querySelector("#game-description").innerHTML = `
                     <p>
                         <h3>Surprise! We failed to fetch game description! :D</h3>
                         ${reason}
