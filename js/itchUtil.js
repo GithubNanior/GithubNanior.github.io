@@ -1,33 +1,9 @@
-gameList = null
-
-function getGameList()
-{
-    if (gameList == null)
-    {
-        return new Promise((resolve)=>(
-            fetch("games.json").then(
-                (response)=>(response.json()).then(
-                    (json)=>(
-                        gameList = json,
-                        resolve(gameList)
-                    )
-                )
-            )
-        ))
-    }
-    else
-    {
-        return new Promise((resolve)=>(
-            resolve(gameList)
-        ))
-    }
-}
-
-function getGameEmbedId(name)
-{
-    return new Promise((resolve)=>(
-        getGameList().then((json)=>resolve(json[name]))
-    ))
+const games = {
+    "rogueblade-i": "11638004",
+    "rogueblade-ii": "11638082",
+    "rat-in-space": "8347177",
+    "mechaponga": "10719092",
+    "a-little-survival": ""
 }
 
 function getGameData(name)
@@ -39,15 +15,9 @@ function getGameData(name)
             onComplete: function(data) {
                 if (data["errors"] == null)
                 {
-                    getGameEmbedId(name).then((id)=>(
-                        data["embedId"] = id,
-                        resolve(data)
-                    ))
+                    data["embedId"] = games[name]
                 }
-                else
-                {
-                    resolve(data)
-                }
+                resolve(data)
             }
         })
     ))
