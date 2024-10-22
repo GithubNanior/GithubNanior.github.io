@@ -15,6 +15,13 @@ body {
     color: var(--text-color);
 }
 
+.page-width {
+    margin: 0 auto;
+
+    width: 50%;
+    min-width: 1100px;
+}
+
 .topbar {
     display: flex;
     box-sizing: border-box;
@@ -23,10 +30,7 @@ body {
     border: 1px solid var(--panel-border-color);
     background-color: var(--panel-color);
     padding: 10px;
-    margin: 0 auto;
-
-    width: 50%;
-    min-width: 1100px;
+    margin-bottom: 10px;
 }
 
 .topbar a {
@@ -46,29 +50,32 @@ body {
     background-color: var(--highlighted-panel-color);
 }
 
-content {
-    display: block;
-    margin: 0 auto;
+/*
+Aside exists optionally, and should be put alongside main in a flex-wrap.
+If the page goes into narrow mode (page width < 1100px) it's width will increase to 100%, taking up full space and pushing main down.
+*/
 
-    width: 50%;
-    min-width: 1100px;
+aside {
+    width: 20em;
+    height: fit-content;
+}
+
+main {
+    flex-grow: 1;
 }
 
 @media screen and (max-width: 1100px) {
-    .topbar {
+    .page-width {
         width: 100%;
         min-width: 0px;
     }
 
-    content {
+    aside {
         width: 100%;
-        min-width: 0px;
     }
 }
 
 section {
-    margin-top: 10px;
-
     border-radius: 10px;
     border: 1px solid var(--panel-border-color);
     padding: 20px;
@@ -84,31 +91,84 @@ section hr {
     border-color: var(--panel-border-color);
 }
 
-.flex-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+#hirarchy summary {
+    list-style-type: none;
 }
 
-.flex-between {
+#hirarchy ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+#hirarchy li {
+    position: relative;
+    padding: 0.5em 32px 0px;
+}
+
+#hirarchy img {
+    position: absolute;
+    top: 1em;
+    transform: translate(0, -50%);
+    left: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#hirarchy li > img {
+    content: url('../images/file_32px.png');
+}
+
+#hirarchy summary > img {
+    content: url('../images/folder_32px.png');
+}
+
+#hirarchy details[open] > summary > img {
+    content: url('../images/folder_open_32px.png');
+}
+
+.flex {
     display: flex;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flex.x-between {
     justify-content: space-between;
 }
 
-.flex-center {
-    display: flex;
+.flex.x-center {
     justify-content: center;
+}
+
+.flex.y-center {
     align-items: center;
+}
+
+.flex.column {
+    flex-direction: column;
+}
+
+.flex.gap-10 {
+    gap: 10px;
 }
 
 a {
     color: var(--text-color);
     font-weight: bold;
+    cursor: pointer;
+    user-select: none;
 }
 
 a:hover {
     color: var(--highlighted-text-color);
+}
+
+a.highlighted {
+    color: white;
 }
 
 a.button {
