@@ -90,7 +90,7 @@ function fileToHtml(filePath)
 
 function directoryToDisplayName(path)
 {
-    return path.split("/").pop().replace(/\.[^/.]+$/, '').replace("-", " ");
+    return path.split("/").pop().replace(/\.[^/.]+$/, '').replace("-", " ").trim();
 }
 
 //The directory to a document html tend to start with ../documents/*.html
