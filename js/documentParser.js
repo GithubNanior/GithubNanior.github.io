@@ -1,4 +1,5 @@
 const fileSystem = require("node:fs");
+const rootPath = process.argv[1].split("/").slice(0, -2).join("/");
 
 parseDocument(process.argv[2]);
 
@@ -10,7 +11,7 @@ function parseDocument(documentName)
         return;
     }
 
-    const folderPath = `../documents/${documentName}`;
+    const folderPath = `${rootPath}/documents/${documentName}`;
     if (!fileSystem.existsSync(folderPath))
     {
         console.error(`Document ${documentName} does not exist.`);
@@ -93,11 +94,11 @@ function directoryToDisplayName(path)
     return path.split("/").pop().replace(/\.[^/.]+$/, '').replace("-", " ").trim();
 }
 
-//The directory to a document html tend to start with ../documents/*.html
+//The directory to a document html tend to start with documents/*.html
 //This function removes those extra parts we don't use.
 function directoryToLink(path)
 {
-    return "document.html?file=" + path.substring(0, path.length - ".html".length).substring("../documents/".length);
+    return "document.html?file=" + path.substring(0, path.length - ".html".length).substring(rootPath.length + "/documents/".length);
 }
 
 function cleanupHtml(html)
