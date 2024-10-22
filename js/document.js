@@ -56,6 +56,7 @@ fetch(`documents/${documentName}-hirarchy.html`).then((hirarchy)=>{
 
 function setHirarchy(html)
 {
+    let hirarchy = document.querySelector("#hirarchy");
     if (document.readyState == "loading")
     {
         window.addEventListener("DOMContentLoaded", ()=>{
@@ -64,11 +65,11 @@ function setHirarchy(html)
         return;
     }
 
-    document.querySelector("#hirarchy").innerHTML = html;
+    hirarchy.innerHTML = html;
 
 
     //Open the current branch of in the file tree that led to this file
-    let currentElement = document.querySelector(`a[href="document.html?file=${filePath}"]`);
+    let currentElement = hirarchy.querySelector(`a[href="document.html?file=${filePath}"]`);
     currentElement.classList.add("highlighted");
     
     while (currentElement.id != "hirarchy")
