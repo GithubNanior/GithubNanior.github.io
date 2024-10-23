@@ -15,41 +15,6 @@ body {
     color: var(--text-color);
 }
 
-.page-width {
-    margin: 0 auto;
-
-    width: 50%;
-    min-width: 1100px;
-}
-
-.topbar {
-    display: flex;
-    box-sizing: border-box;
-    height: 70px;
-    border-radius: 0px 0px 10px 10px;
-    border: 1px solid var(--panel-border-color);
-    background-color: var(--panel-color);
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.topbar a {
-    display: flex;
-    padding: 0px 30px;
-    color: var(--text-color);
-    transition: background-color 0.1s;
-    align-items: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: x-large;
-}
-
-.topbar a:hover {
-    color: var(--highlighted-text-color);
-    background-color: var(--highlighted-panel-color);
-}
-
 /*
 Aside exists optionally, and should be put alongside main in a flex-wrap.
 If the page goes into narrow mode (page width < 1100px) it's width will increase to 100%, taking up full space and pushing main down.
@@ -65,11 +30,6 @@ main {
 }
 
 @media screen and (max-width: 1100px) {
-    .page-width {
-        width: 100%;
-        min-width: 0px;
-    }
-
     aside {
         width: 100%;
     }
@@ -89,42 +49,6 @@ h2 {
 section hr {
     margin: 20px -20px;
     border-color: var(--panel-border-color);
-}
-
-#hirarchy summary {
-    list-style-type: none;
-}
-
-#hirarchy ul {
-    list-style-type: none;
-    padding: 0px;
-}
-
-#hirarchy li {
-    position: relative;
-    padding: 0.5em 32px 0px;
-}
-
-#hirarchy img {
-    position: absolute;
-    top: 1em;
-    transform: translate(0, -50%);
-    left: 0;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-}
-
-#hirarchy li > img {
-    content: url('../images/file_32px.png');
-}
-
-#hirarchy summary > img {
-    content: url('../images/folder_32px.png');
-}
-
-#hirarchy details[open] > summary > img {
-    content: url('../images/folder_open_32px.png');
 }
 
 .flex {
@@ -183,15 +107,11 @@ a.button {
     background-color: var(--panel-color);
 }
 
-#placeholder-iframe {
-    box-sizing: border-box;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    width: 975px;
-    height: 675px;
-    background-color: black;
+.page-width {
+    margin: 0 auto;
+
+    width: 100%;
+    max-width: 1100px;
 }
 
 .card-container {
@@ -203,4 +123,79 @@ a.button {
 
     gap: 1.5rem;
     max-width: calc(1.125rem * 56 + 1.5rem * 3);
+}
+
+.topbar {
+    display: flex;
+    box-sizing: border-box;
+    height: 70px;
+    border-radius: 0px 0px 10px 10px;
+    border: 1px solid var(--panel-border-color);
+    background-color: var(--panel-color);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.topbar a {
+    display: flex;
+    padding: 0px 30px;
+    color: var(--text-color);
+    transition: background-color 0.1s;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: x-large;
+}
+
+.topbar a:hover {
+    color: var(--highlighted-text-color);
+    background-color: var(--highlighted-panel-color);
+}
+
+#hirarchy summary {
+    list-style-type: none;
+}
+
+#hirarchy ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+#hirarchy li {
+    position: relative;
+    padding: 0.5em 32px 0px;
+}
+
+#hirarchy img {
+    position: absolute;
+    top: 1em;
+    transform: translate(0, -50%);
+    left: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#hirarchy li > img {
+    content: url('../images/file_32px.png');
+}
+
+#hirarchy summary > img {
+    content: url('../images/folder_32px.png');
+}
+
+#hirarchy details[open] > summary > img {
+    content: url('../images/folder_open_32px.png');
+}
+
+#placeholder-iframe {
+    box-sizing: border-box;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 975px;
+    height: 675px;
+    background-color: black;
 }
