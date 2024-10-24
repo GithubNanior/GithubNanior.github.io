@@ -20,16 +20,26 @@ Aside exists optionally, and should be put alongside main in a flex-wrap.
 If the page goes into narrow mode (page width < 1100px) it's width will increase to 100%, taking up full space and pushing main down.
 */
 
-aside {
-    width: 20em;
-    height: fit-content;
-}
-
 main {
     flex-grow: 1;
 }
 
+.aside-container {
+    display: flex;
+    gap: 10px;
+}
+
+aside {
+    width: 20em;
+    height: fit-content;
+    flex: auto 0 0;
+}
+
 @media screen and (max-width: 1100px) {
+    .aside-container {
+        flex-direction: column;
+    }
+
     aside {
         width: 100%;
     }
