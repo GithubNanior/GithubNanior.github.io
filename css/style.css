@@ -52,6 +52,10 @@ section {
     background-color: var(--panel-color);
 }
 
+li {
+    margin: 10px 0;
+}
+
 h2 {
     margin: 0;
 }
