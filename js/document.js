@@ -80,10 +80,8 @@ function setHirarchy(html)
             currentElement.toggleAttribute("open");
         }
     }
-}
 
-window.addEventListener("DOMContentLoaded", () => {
-    let hirarchy = document.querySelector("#hirarchy");
+    //Clicking the icon or the link will act normally, otherwise the click is cancelled.
     hirarchy.addEventListener("click", (e) => {
         switch (e.target.nodeName.toLowerCase())
         {
@@ -95,7 +93,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 break;
         }
     });
+}
 
+window.addEventListener("DOMContentLoaded", () => {
     let title = document.querySelector("#title");
     title.textContent = fileName;
 });
