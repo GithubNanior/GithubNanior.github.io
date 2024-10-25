@@ -178,7 +178,7 @@ a.button {
 
 #hirarchy li {
     position: relative;
-    padding: 0.5em 32px 0px;
+    padding: 0.5em 0 0 32px;
 }
 
 #hirarchy img {
