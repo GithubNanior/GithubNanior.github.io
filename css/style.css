@@ -163,7 +163,7 @@ a.button {
     display: flex;
     flex-direction: column;
     align-items: end;
-    position: relative;
+    z-index: 10;
 }
 
 .dropdown input[type="checkbox"] {
@@ -220,6 +220,8 @@ a.button {
 }
 
 .dropdown a {
+    padding: 10px;
+
     display: flex;
     align-items: center;
     font-style: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -230,7 +232,7 @@ a.button {
 
 .dropdown li {
     margin: 0;
-    padding: 10px;
+    padding: 0;
 
     transition: background-color 0.1s;
 
