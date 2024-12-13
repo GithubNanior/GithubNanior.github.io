@@ -155,6 +155,10 @@ a.button {
     margin-bottom: 10px;
 }
 
+.topbar img[alt="logo"] {
+    height: 50px;
+}
+
 .topbar a {
     text-decoration: none;
 }
