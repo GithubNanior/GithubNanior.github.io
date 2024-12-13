@@ -10,6 +10,7 @@
 }
 
 * {
+    box-sizing: border-box;
     line-height: calc(1em + 8px);
 }
 
@@ -116,7 +117,6 @@ a.highlighted {
 }
 
 a.button {
-    box-sizing: border-box;
     display: block;
     text-align: center;
     margin: 5px;
@@ -147,7 +147,6 @@ a.button {
 .topbar {
     display: flex;
     justify-content: space-between;
-    box-sizing: border-box;
     height: 70px;
     border-radius: 0px 0px 10px 10px;
     border: 1px solid var(--panel-border-color);
@@ -307,7 +306,6 @@ a.button {
 }
 
 #placeholder-iframe {
-    box-sizing: border-box;
     display: flex;
     text-align: center;
     align-items: center;
