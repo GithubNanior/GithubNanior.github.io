@@ -11,7 +11,7 @@ if (filePath != undefined)
     }
     while (fileName == "summary");
 
-    fileName = fileName.replace("-", " ");
+    fileName = fileName.replaceAll("-", " ").trim();
 }
 
 
