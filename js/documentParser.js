@@ -1,4 +1,5 @@
 const fileSystem = require("node:fs");
+const path = require('path');
 const rootPath = process.argv[1].split("/").slice(0, -2).join("/");
 
 parseDocument(process.argv[2]);
@@ -41,12 +42,12 @@ function folderToHtml(folderPath)
             continue;
         }
 
-        switch (item.substring(item.lastIndexOf(".")))
+        switch (path.extname(item))
         {
             case ".html":
                 innerHtml += fileToHtml(folderPath + "/" + item);
                 break;
-            default:
+            case "":
                 innerHtml += folderToHtml(folderPath + "/" + item);
                 break;
         }
