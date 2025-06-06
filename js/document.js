@@ -1,5 +1,7 @@
-let filePath = new URLSearchParams(window.location.search).get("file");
-let documentName = filePath.split("/").shift();
+const filePath = new URLSearchParams(window.location.search).get("file");
+const folderPath = filePath.substring(0, filePath.lastIndexOf('/'));
+const documentName = filePath.split("/").shift();
+
 let fileName = "Undefined";
 
 if (filePath != undefined)
@@ -23,10 +25,17 @@ fetch(`documents/${filePath}.html`).then((article)=>{
     else
     {
         article.text().then((html)=>{
-            setContent(html);
+            setContent(replaceLocalLinks(html));
         });
     }
 })
+
+function replaceLocalLinks(html)
+{
+    return html.replace(/"local:.+?"/gi, (match)=>{
+        return match.replace(/local:/gi, `documents/${folderPath}/`);
+    });
+}
 
 function setContent(html)
 {
