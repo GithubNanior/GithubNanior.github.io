@@ -67,6 +67,16 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
+table {
+    border-spacing: 0;
+}
+
+th, td {
+    padding: 1ch;
+    border: 1px var(--panel-border-color) solid;
+    text-align: left;
+}
+
 section hr {
     margin: 20px -20px;
     border-color: var(--panel-border-color);
