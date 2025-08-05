@@ -1,0 +1,20 @@
+{
+    "name": "githubnanior.github.io",
+    "version": "1.0.0",
+    "description": "",
+    "homepage": "https://github.com/GithubNanior/GithubNanior.github.io#readme",
+    "bugs": {
+        "url": "https://github.com/GithubNanior/GithubNanior.github.io/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GithubNanior/GithubNanior.github.io.git"
+    },
+    "license": "ISC",
+    "author": "Jakob Speybrouck (jakobspeybrouck@gmail.com)",
+    "type": "commonjs",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}
