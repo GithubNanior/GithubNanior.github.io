@@ -1,0 +1,51 @@
+<h3>Overview</h3>
+<p>
+    The Saveable system is a core system in ALS that enables certain prefab instances and their references to persist across game sessions.
+</p>
+
+<hr>
+
+<h3>Related documentations</h3>
+<p>
+    <ul>
+        <li><a href="doc:Little-DevDocs/Editor/The-Registry-system/summary"><code>The Registry system</code></a></li>
+        <li><a href="doc:Little-DevDocs/Editor/The-Saveable-system/SaveableObject-component"><code>The SaveableObject component</code></a></li>
+        <li><a href="doc:Little-DevDocs/Editor/The-Saveable-system/SaveableManager-component"><code>The SaveableManager component</code></a></li>
+    </ul>
+</p>
+
+<hr>
+
+<h3>Terminology</h3>
+<p>
+    <ul>
+        <li><b>Saveable object</b> refers to a persistent object that can be spawned into the world, not to be confused with the class <code>SaveableObject</code>.</li>
+        <li><b>Saveable instance</b> refers to an instance of a Saveable object.</li>
+        <li><b>Prefab Id or just Id</b>, is an <code>int</code> unique to each Saveable object, each id corresponds to a <code>SaveableObject</code> registered in <code>AssetsManager.saveableRegistry</code>.</li>
+        <li><b>Instance Id</b> is an <code>int</code> unique per Saveable instance, <u>it's unique across the entire save</u> to allow remembering objects cross-dimension.</li>
+        <li><b>Instance Code</b> is an <code>int</code>, a tally that increments whenever an Instance Id gets reused, enabling you to distinguish new Saveable instances with reused instance Ids from the previous owner of said Id.</li>
+        <li><b>Registered SavedObjects</b> refer to <code>SavedObject</code>s that are registered in the <code>SaveableManager</code>, most methods count unregistered <code>SavedObject</code>s as null or invalid.</li>
+    </ul>
+</p>
+
+<hr>
+
+<h3>Multi-form objects</h3>
+<p>
+    Saveable objects exist in three stages, precision, complexity, whatever you want to call them. The <code>SaveableManager</code> handles conversions between the three.<br>
+    Note that the lower stage only gets updated when the higher stage is unloaded.
+    <ul>
+        <li>
+            <b>Binary:</b> A compact, persistent data format stored on disk. They exist inside their dimension's save file and are thus inaccessible.<br>
+            All Saveable instances, regardless of dimension have a binary representation.
+        </li>
+        <li>
+            <b><code>SavedObject</code>:</b> Parsed from the binary when a dimension is loaded into memory. You're not meant to operate on <code>SavedObject</code>s directly however, but rather by their <code>SaveableReference</code>.<br>
+            All Saveable instances in memory have an underlying <code>SavedObject</code>.
+        </li>
+        <li>
+            <b><code>SaveableObject</code>:</b> Also called the loaded object, this is the visible, interactable <code>GameObject</code> equivalent of a <code>SavedObject</code>.<br>
+            Gameplay code can easily load and unload them from their <code>SaveableReference</code>.
+        </li>
+    </ul>
+</p>
