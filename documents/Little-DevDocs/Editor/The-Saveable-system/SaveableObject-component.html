@@ -1,0 +1,42 @@
+<h3>Overview</h3>
+<p>
+    SaveableObject is a component giving a prefab Save&Load functionalities, you should only attach one to a saveable object's root.
+</p>
+
+<hr>
+
+<h3>Properties</h3>
+<p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Registry Name</td>
+            <td>
+                A unique name that the AssetsManager will register this SaveableObject by.<br>
+                If the same name is registered more than once, the newer version will replace the older one.
+            </td>
+        </tr>
+        <tr>
+            <td>Saveable Behaviours</td>
+            <td>
+                All ISaveables on the prefab should be assigned here, as otherwise they won't save nor load.
+            </td>
+        </tr>
+        <tr>
+            <td>Subparts</td>
+            <td>
+                All <a href="document.html?file=Little-DevDocs/Editor/The-Saveable-system/SaveableSubpart-component">SaveableSubpart</a>s on the prefab.
+            </td>
+        </tr>
+        <tr>
+            <td>Bounds</td>
+            <td>
+                List of topdown 2d shapes that define which areas it occupy, for terrain binding and procedural generation purposes.<br>
+                Most of the time, you should ensure that all colliders are contained within these bounds.
+            </td>
+        </tr>
+    </table>
+</p>

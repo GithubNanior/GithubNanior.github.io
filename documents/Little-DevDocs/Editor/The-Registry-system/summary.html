@@ -1,0 +1,61 @@
+<h3>Overview</h3>
+<p>
+    The Registry system enables dynamically adding and removing content, made to be moddable and extensible.
+</p>
+
+<hr>
+
+<h3>Terminology</h3>
+<p>
+    <ul>
+        <li><b>Registry</b>, or Registries in plural, are <code>generic classes</code> handled by the <code>AssetsManager</code>, they're central databases where you can register and retrieve a certain type of content. For example <code>FloorTile</code>s, <code>Item</code>s or <code>SaveableObject</code>s.</li>
+        <li><b>Registerable</b>s can be registered to a Registry, and refers to an asset implementing <code>IRegisterable</code>, it could be an instance of a <code>ScriptableObject</code>, a <code>MonoBehaviour</code> on a prefab, or anything alike.</li>
+        <li><b>Registry name</b> is a <code>string</code> unique to each Registerable, you can get Registerables from the Registry via their Registry name. Assuming that they've been registered, obviously.</li>
+        <li><b>Registry id</b>s are <code>int</code>s unique to each Registerable, underlyingly, the game always use the Registry id as it's more efficient. You can get Registerables from the Registry via their Id, however you should never hardcode Ids in your code!</li>
+    </ul>
+</p>
+
+<hr>
+
+<h3>How we got here</h3>
+<p>
+    All Registerables, no matter a floor tile, an item or a creature, have a unique id to tell them apart from others of their kind.<br>
+    This was originally done using an integer for its speed and simplicity, but soon deemed tedious and hard to scale.<br>
+</p>
+<p>
+    I wanted to use string Ids like those in Minecraft for its verbosity (ex: <code>minecraft:dirt</code>), but I don't want to burden my code with the runtime implications,
+    so I decided to make all string Ids map to an integer, so even if on the outside it looks like it uses strings... Internally everything is represented by an integer, smooth!<br>
+    ...And ironically, a while later, I learned that Minecraft does the same... I did exactly what Minecraft does, by trying to avoid what I thought it does.
+</p>
+<p>
+    Each new entry in the map is kept so that temporarily deleting content will keep the id reserved, and also to stop new content from taking its place.<br>
+    But since this means each piece of content will reserve a permanent entry in the map, each world is made to keep their own map, rather than the entire game.
+</p>
+
+<hr>
+
+<h3>How Registries behave</h3>
+<p>
+    Registries are automatically initialized via the <code>Registry.Load</code> method when creating or loading a world up.<br>
+    Currently each Registry is configured to load its Registerables from a corresponding folder in the resources folder.<br>
+    When registering Registerables, the Registry will look the Registry name up in the <code>Registry.nameToId</code> dictionary and handle it as follows:
+    <ul>
+        <li>If the Registry name is new, register the Registerable with a unique id and add it to the map.</li>
+        <li>If the Registry name is in the dictionary, register it with that id.</li>
+        <li>If a Registerable with the same name is already registered, replace the original with the new Registerable.</li>
+        <li>If a Registerables is missing at the end, register a placeholder created via the <code>Registry.createPlaceholder</code> delegate.</li>
+    </ul>
+</p>
+
+<hr>
+
+<h3>Examples</h3>
+<p>
+    Getting content from the Item registry.
+    <pre><code>
+Floor floor = AssetsManager.floorRegistry["als:grass"];
+
+//Don't hardcode ids, there's no warrantee what you'll get, and it may be different across worlds!
+Floor floor = AssetsManager.floorRegistry[5];
+    </code></pre>
+</p>
