@@ -67,6 +67,19 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
+code {
+    padding: 0.25em;
+    font-size: medium;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: rgb(39, 46, 61);
+    color: rgb(158, 187, 194);
+}
+
+pre > code {
+    display: block;
+}
+
 table {
     border-spacing: 0;
 }
