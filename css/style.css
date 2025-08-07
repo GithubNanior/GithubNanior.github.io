@@ -74,6 +74,7 @@ code {
 
 pre > code {
     display: block;
+    overflow-x: scroll;
 }
 
 table {
