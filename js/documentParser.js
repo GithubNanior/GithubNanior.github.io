@@ -11,6 +11,15 @@ const rules = [
     }
 ];
 
+const postrules = [
+    {
+        test: /.*\.html$/i,
+        use: validateLinks
+    }
+];
+
+const htmlLinkRegex = /(?<=src=").*?(?=")|(?<=href=").*?(?=")/gi;
+
 parseDocument(process.argv[2]);
 
 function parseDocument(documentName)
@@ -32,13 +41,14 @@ function parseDocument(documentName)
     fileSystem.rmSync(distFolderPath, { recursive: true, force: true });
     fileSystem.mkdirSync(distFolderPath);
 
-    transformDocument(srcFolderPath, distFolderPath);
+    transformDocument(srcFolderPath, distFolderPath, rules);
+    transformDocument(distFolderPath, distFolderPath, postrules);
     buildHierarchy(srcFolderPath, distFolderPath);
 
     console.log(`Document ${documentName} has been successfully built!`)
 }
 
-function transformDocument(srcFolderPath, distFolderPath)
+function transformDocument(srcFolderPath, distFolderPath, ruleset)
 {
     let content = fileSystem.readdirSync(srcFolderPath);
 
@@ -47,12 +57,15 @@ function transformDocument(srcFolderPath, distFolderPath)
         const distPath = path.join(distFolderPath, item);
         if (path.extname(item) == "")
         {
-            fileSystem.mkdirSync(distPath);
-            transformDocument(srcPath, distPath);
+            if (!fileSystem.existsSync(distPath))
+            {
+                fileSystem.mkdirSync(distPath);
+            }
+            transformDocument(srcPath, distPath, ruleset);
             continue;
         }
 
-        const transformer = rules.find((rule) => rule.test.test(srcPath))
+        const transformer = ruleset.find((rule) => rule.test.test(srcPath))
 
         if (transformer)
         {
@@ -79,26 +92,45 @@ function transformHtml(distPath, html)
     html = documentFragment.innerHTML;
 
     //#region Raw text manipulation
-    const linkRegex = /((?<=src=")(.*?)(?=")|(?<=href=")(.*?)(?="))/gi;
-
-    html = html.replaceAll(linkRegex, (link) => {
-        let transformedLink;
+    html = html.replaceAll(htmlLinkRegex, (link) => {
         if (link.startsWith("local:"))
         {
-            transformedLink = path.join(path.dirname(distPath), link.slice("local:".length));
+            return path.join(path.dirname(distPath), link.slice("local:".length));
         }
         else if(link.startsWith("doc:"))
         {
-            transformedLink = shortPathToLink(link.slice("doc:".length));
+            return shortPathToLink(link.slice("doc:".length));
         }
         else
         {
-            transformedLink = link;
+            return link;
         }
-        return transformedLink;
     });
     //#endregion
 
+    return html;
+}
+
+/** @param { String } html  */
+function validateLinks(distPath, html)
+{
+    htmlLinkRegex.exec(html)?.forEach((link) => {
+        const docLink = /(?<=document\.html\?file=).*/.exec(link)?.[0];
+        if (docLink)
+        {
+            if (!fileSystem.existsSync(shortPathToDistPath(docLink)))
+            {
+                console.error(`"${link}" is invalid.\nAt ${distPath}`);
+            }
+        }
+        else
+        {
+            if (!fileSystem.existsSync(link))
+            {
+                console.error(`"${link}" is invalid.\nAt ${distPath}`);
+            }
+        }
+    });
     return html;
 }
 
@@ -224,6 +256,15 @@ function sourcePathToLink(path)
 function shortPathToLink(path)
 {
     return `document.html?file=${path}`;
+}
+
+/**
+ * The short path to a document file tend is typically formatted as everything in between src(or dist)-documents/.../*.html.
+ * This function turns it into a link to the dist document
+ */
+function shortPathToDistPath(path)
+{
+    return `dist-documents/${path}.html`;
 }
 
 function cleanupHtml(html)
